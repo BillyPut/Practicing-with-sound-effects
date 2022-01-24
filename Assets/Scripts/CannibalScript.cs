@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Globals;
 
 public class CannibalScript : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    public SoundManagerScript sm;
+    string scene;
+  
    
 
 
@@ -29,9 +31,23 @@ public class CannibalScript : MonoBehaviour
         DoJump();
         DoMove();
         DoThrow();
+
+        scene = SceneManager.GetActiveScene().name;
+
+        if (Input.GetKeyDown("l"))
+        {
+            if (scene == "Scene1")
+            {
+                SceneManager.LoadScene("Scene2");
+            }
+            else
+            {
+                SceneManager.LoadScene("Scene1");
+            }
+
+        }
         
-
-
+        
 
 
     }
@@ -47,6 +63,7 @@ public class CannibalScript : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
+                FindObjectOfType<AudioManager>().Play("PlayerJump");
                 velocity.y = 11f;
                
             }
@@ -119,6 +136,19 @@ public class CannibalScript : MonoBehaviour
 
 
     }
+
+    void PlayThrowNoise()
+    {
+        FindObjectOfType<AudioManager>().Play("PlayerThrow");
+    }
+    void PlayWalkNoise()
+    {
+        FindObjectOfType<AudioManager>().Play("PlayerWalk");
+    }
+
+
+
+
     void DoThrow()
     {
         if (Input.GetKey("z"))
@@ -136,19 +166,8 @@ public class CannibalScript : MonoBehaviour
     }
 
 
-    void PlaySoundEffect()
-    {
-        sm.Play(0);
-    }
-    void PlaySoundEffect2()
-    {
-        sm.Play(2);
-    }
-    void PlaySoundEffect3()
-    {
-        sm.Play(1);
-    }
-
+   
+ 
 
 
 
