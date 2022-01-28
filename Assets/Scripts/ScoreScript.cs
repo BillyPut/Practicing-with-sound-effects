@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreScript : MonoBehaviour
@@ -14,4 +12,13 @@ public class ScoreScript : MonoBehaviour
         return PlayerPrefs.GetInt(KeyName);
     }
 
+    public void SetString(string KeyName, string Value)
+    {
+        PlayerPrefs.SetString(KeyName, Value);
+    }
+
+    public string GetString(string KeyName)
+    {
+        return PlayerPrefs.GetString(KeyName);
+    }
 }
